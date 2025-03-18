@@ -72,3 +72,20 @@ class Dog extends Creature {
 
     
 }
+
+class Trasher extends Dog {
+    constructor(name, maxPower = 3, image = null) {
+        super('Громила', 5, image);
+    }
+
+    modifyTakenDamage(value, fromCard, gameContext, continuation) {
+        this.view.signalAbility(() => {continuation(Math.max(value - 1, 0))});
+    }
+
+    getDescriptions() {
+        return [
+            'если Громилу атакуют, то он получает на 1 меньше урона',
+            ...super.getDescriptions()
+        ];
+    }
+}
