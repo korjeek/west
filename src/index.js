@@ -4,7 +4,7 @@ import Creature from "./Card.js";
 
 // Отвечает является ли карта уткой.
 function isDuck(card) {
-    return card instanceof Duck;
+    return card instanceof Duck || (card instanceof PseudoDuck);
     //return card && card.quacks && card.swims;
 }
 
@@ -102,8 +102,8 @@ class Gatling extends Creature {
 
 
 class Trasher extends Dog {
-    constructor(name, maxPower = 3, image = null) {
-        super('Громила', 5, image);
+    constructor(name = 'Громила', maxPower = 5, image = null) {
+        super(name, maxPower, image);
     }
 
     modifyTakenDamage(value, fromCard, gameContext, continuation) {
@@ -117,3 +117,34 @@ class Trasher extends Dog {
         ];
     }
 }
+
+class PseudoDuck extends Dog {
+    constructor(name = 'Псевдоутка', maxPower = 3, image = null) {
+        super(name, maxPower, image);
+    }
+
+    quacks() {
+        console.log('quack');
+    }
+
+    swims() {
+        console.log('float: both;');
+    }
+}
+
+/*class Rogue extends Creature {
+    constructor(name = 'Изгой', maxPower = 2, image = null) {
+        super(name, maxPower, image);
+    }
+
+    doBeforeAttack(gameContext, onDone) {
+        const arr = ['modifyDealedDamageToCreature', 'modifyDealedDamageToPlayer', 'modifyTakenDamage'];
+        const roguePrototype = Object.getPrototypeOf(this);
+        gameContext.oppositePlayer.table.forEach(card => {
+            if (card && Object.getPrototypeOf(card) === roguePrototype) {
+        arr.forEach(x => {
+
+        })
+    }
+}
+*/
