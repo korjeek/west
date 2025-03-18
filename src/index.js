@@ -99,7 +99,7 @@ class Gatling extends Creature {
     }
 }
     
-}
+
 
 class Trasher extends Dog {
     constructor(name, maxPower = 3, image = null) {
