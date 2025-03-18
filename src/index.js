@@ -83,6 +83,8 @@ class Dog extends Card {
     constructor(name = 'Пес-бандит', maxPower = 3, image) {
         super(name, maxPower, image);
     }
+}
 
-    
+class Gatling extends Creature {
+    constructor(name = 'Гатлинг', maxPower = 6, image)
 }
