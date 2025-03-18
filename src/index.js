@@ -66,11 +66,35 @@ game.play(false, (winner) => {
 });
 
 class Dog extends Creature {
-    constructor(name = 'Пес-бандит', maxPower = 3, image) {
+    constructor(name = 'Пес-бандит', maxPower = 3, image = null) {
         super(name, maxPower, image);
     }
 }
 
 class Gatling extends Creature {
-    constructor(name = 'Гатлинг', maxPower = 6, image)
+    constructor(name = 'Гатлинг', maxPower = 6, image = null) {
+        super(name, maxPower, image);
+    }
+
+    attack(gameContext, continuation) {
+        const taskQueue = new TaskQueue();
+        gameContext.oppositePlayer.table.forEach((card, index) => {
+            taskQueue.push(onDone => {
+                this.view.showAttack(onDone);
+            });
+            taskQueue.push(onDone => {
+                if (card) { 
+                    this.dealDamageToCreature(2, card, gameContext, onDone);
+                } else {
+                    onDone();
+                }
+            });
+        });
+
+        taskQueue.push(onDone => {
+            continuation();
+        });
+
+        taskQueue.continueWith(continuation);
+    }
 }
