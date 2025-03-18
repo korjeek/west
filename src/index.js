@@ -50,7 +50,7 @@ const seriffStartDeck = [
 
 // Колода Бандита, верхнего игрока.
 const banditStartDeck = [
-    new Card('Бандит', 3),
+    new Dog('Бандит', 3),
 ];
 
 
@@ -64,3 +64,11 @@ SpeedRate.set(1);
 game.play(false, (winner) => {
     alert('Победил ' + winner.name);
 });
+
+class Dog extends Card {
+    constructor(name = 'Пес-бандит', maxPower = 3, image) {
+        super(name, maxPower, image);
+    }
+
+    
+}
